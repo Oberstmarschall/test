@@ -1,0 +1,25 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    ansible \
+    lvm2 \
+    xfsprogs \
+    util-linux \
+    parted \
+    sudo \
+    && apt-get clean
+
+RUN useradd -ms /bin/bash ansible && echo "ansible ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+RUN fallocate -l 50G /fake_disk.img
+
+COPY setup_disk.sh /usr/local/bin/setup_disk.sh
+RUN chmod +x /usr/local/bin/setup_disk.sh
+
+USER ansible
+WORKDIR /home/ansible
+
+ENTRYPOINT ["/usr/local/bin/setup_disk.sh"]
+CMD ["/bin/bash"]

@@ -1,0 +1,81 @@
+---
+- name: Configure logical volume and mount
+  hosts: localhost
+  become: true
+  # vars_files:
+  #   - vars.yml
+
+  vars:
+    disk_device: /dev/loop2
+    lv_size_gib: 10
+    vg_name: data
+    lv_name: mnt_files
+    mount_point: /mnt/files
+    users:
+      - john
+      - alex
+
+  tasks:
+    - name: Create physical volume
+      command: pvcreate -ff --yes {{ disk_device }}
+      ignore_errors: yes
+
+    - name: Create volume group
+      lvg:
+        vg: "{{ vg_name }}"
+        pvs: "{{ disk_device }}"
+
+    - name: Rescan volume groups and create device nodes
+      command: vgscan --mknodes
+
+    - pause:
+        seconds: 2
+
+    # Optional cleanup if re-running playbook repeatedly
+    - name: Remove stale logical volume device if exists
+      command: dmsetup remove {{ vg_name }}-{{ lv_name }}
+      ignore_errors: yes
+
+    - name: Remove logical volume if exists
+      command: lvremove -f /dev/{{ vg_name }}/{{ lv_name }}
+      ignore_errors: yes
+
+    - name: Create logical volume
+      lvol:
+        vg: "{{ vg_name }}"
+        lv: "{{ lv_name }}"
+        size: "{{ lv_size_gib }}g"
+
+    - name: Create shared group
+      group:
+        name: sharedusers
+        state: present
+
+    - name: Create mount point
+      file:
+        path: "{{ mount_point }}"
+        state: directory
+        mode: '1770'
+        owner: root
+        group: sharedusers
+
+    - name: Create XFS filesystem
+      filesystem:
+        fstype: xfs
+        dev: "/dev/{{ vg_name }}/{{ lv_name }}"
+
+    - name: Mount the filesystem
+      mount:
+        path: "{{ mount_point }}"
+        src: "/dev/{{ vg_name }}/{{ lv_name }}"
+        fstype: xfs
+        opts: defaults
+        state: mounted
+
+    - name: Create users and add to shared group
+      user:
+        name: "{{ item }}"
+        groups: sharedusers
+        append: yes
+        state: present
+      loop: "{{ users }}"

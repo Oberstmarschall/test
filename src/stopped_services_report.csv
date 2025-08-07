@@ -1,0 +1,87 @@
+Service Name,Stop Count
+Software Protection,7
+Clipboard User Service_4a762,1
+Windows Push Notifications User Service_4a762,1
+Connected Devices Platform User Service_4a762,1
+Update Orchestrator Service,4
+Group Policy Client,4
+Hyper-V Volume Shadow Copy Requestor,4
+User Access Logging Service,3
+Connected User Experiences and Telemetry,4
+DHCP Server,4
+Windows Update,4
+Capability Access Manager Service,4
+Client License Service (ClipSVC),7
+Active Directory Web Services,4
+AppX Deployment Service (AppXSVC),7
+Windows Licensing Monitoring Service,4
+SysMain,4
+Windows Update Medic Service,11
+Windows Management Instrumentation,4
+Intersite Messaging,4
+Virtual Disk,3
+Program Compatibility Assistant Service,3
+Remote Desktop Services UserMode Port Redirector,4
+Certificate Propagation,4
+Secure Socket Tunneling Protocol Service,4
+Plug and Play,4
+Windows Time,4
+WinHTTP Web Proxy Auto-Discovery Service,4
+Distributed Transaction Coordinator,3
+Windows Connection Manager,4
+User Profile Service,4
+DHCP Client,4
+Remote Access Connection Manager,4
+Device Setup Manager,4
+Cryptographic Services,4
+Windows Font Cache Service,4
+Volume Shadow Copy,4
+State Repository Service,5
+Diagnostic Policy Service,3
+Task Scheduler,4
+Windows Event Log,4
+Message Queuing,4
+Remote Desktop Services,4
+DNS Server,4
+Microsoft Defender Antivirus Service,4
+DFS Replication,4
+Windows Remote Management (WS-Management),4
+Active Directory Domain Services,4
+Network Setup Service,7
+NcaSvc,5
+sppsvc,4
+Network Connectivity Assistant,5
+Delivery Optimization,8
+StateRepository,2
+Microsoft Edge Update Service (edgeupdate),8
+Windows Modules Installer,4
+courier-ttnwqkcaifkrjmjf,1
+VMware vCenter Converter Standalone Agent,3
+courier-xzltqmmqbfdhayjb,1
+Portable Device Enumerator Service,3
+courier-wkjhtlwkkaqpvrva,1
+Windows Biometric Service,2
+Clipboard User Service_ab4b5,1
+Windows Push Notifications User Service_ab4b5,1
+Connected Devices Platform User Service_ab4b5,1
+Microsoft Passport,1
+Microsoft Passport Container,2
+Windows Security Service,2
+Diagnostic System Host,2
+IPsec Policy Agent,3
+Windows Installer,2
+IKE and AuthIP IPsec Keying Modules,3
+courier-kudgbjulbaxtvxqn,1
+Microsoft Account Sign-in Assistant,2
+Remote Registry,2
+Clipboard User Service_5ac95,1
+Windows Push Notifications User Service_5ac95,1
+Connected Devices Platform User Service_5ac95,1
+Data Sharing Service,1
+Clipboard User Service_4c15b,1
+Windows Push Notifications User Service_4c15b,1
+Connected Devices Platform User Service_4c15b,1
+vds,1
+NetSetupSvc,1
+Windows Error Reporting Service,1
+Optimize drives,1
