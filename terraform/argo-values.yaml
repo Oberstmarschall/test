@@ -1,0 +1,9 @@
+server:
+  service:
+    type: NodePort
+    nodePortHttp: 30080
+#configs:
+  # secret:
+  #   argocdServerAdminPassword: "$2a$10$QxRdiPy0xvsvwVdqBZX2Huv2mH61cB2Y6ZTxFt0YnEguv7Vq4eGpa" # 1234
+params:
+  server.insecure: true

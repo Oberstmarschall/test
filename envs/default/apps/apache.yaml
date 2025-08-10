@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apache-web
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: apache
+    targetRevision: 11.4.6
+    helm:
+      values: |
+        replicaCount: 2
+        service:
+          type: ClusterIP
+        containerSecurityContext:
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+          runAsUser: 0
+        extraVolumes:
+          - name: custom-html
+            emptyDir: {}
+        extraVolumeMounts:
+          - name: custom-html
+            mountPath: /opt/bitnami/apache/htdocs
+        initContainers:
+          - name: init-html
+            image: busybox
+            command:
+              - sh
+              - -c
+              - |
+                echo "<html><body><h1>Pod: $(hostname)</h1><h2>IP: $(hostname -i)</h2></body></html>" > /app/index.html
+            volumeMounts:
+              - name: custom-html
+                mountPath: /app
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: nginx
+          hostname: apache.localhost
+          path: /
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apache
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
